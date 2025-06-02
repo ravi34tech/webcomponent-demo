@@ -1,5 +1,16 @@
 # React + TypeScript + Vite
 
+## Run Application
+
+Run the below command
+
+- npm run build
+- open the public/index.html file in live server
+
+embedd the "ravi-web-component.umd.js" file in any html or component add the logic what is menctioned in index.html like data and call back functions.
+
+------------------------------------------------------------------
+
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
 Currently, two official plugins are available:
