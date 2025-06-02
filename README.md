@@ -22,44 +22,52 @@ Currently, two official plugins are available:
 
 If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+```html
+  <body>
+  <div id="parent-app">
+      <h1 class="App">WebComponent from GitHub Application...</h1>
+      <div id="CHILD_TEXT">
+
+      </div>
+  </div>
+  <div id="consent-web-component">
+    <test-wc 
+        id="WC-GIT-HUB"
+        name="Server web Component GitHub Test" 
+        link="login" 
+        token="token-conset-456780-github"
+        on-success="onSuccessParentCall"
+        on-error="onErrorParentCall"
+      >
+    </test-wc>
+  </div>
+  <script>
+    var json = {
+      userId: "ABC",
+      authTest: "succes"
+    }
+
+    var jsonObj =JSON.stringify(json);
+
+    document.getElementById('WC-GIT-HUB').setAttribute('info', jsonObj);
+
+      window.onSuccessParentCall = function(e) {
+        console.info("PARENT : SUCCESS : ",e);
+        var htmlvalue = `<div style="background-color: green;">`+ JSON.stringify(e) +`</div>`;
+        document.getElementById("CHILD_TEXT").innerHTML = htmlvalue
+      }
+
+      function onErrorParentCall(event) {
+        console.info("PARENT : ERROR : ",event);
+        var htmlvalue = `<div style="background-color: red;">`+ JSON.stringify(event) +`</div>`;
+        document.getElementById("CHILD_TEXT").innerHTML = htmlvalue;
+      }
+  </script>
+  <script src="../dist/ravi-web-component.umd.js"></script>
+</body>
+
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
 ```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
 ```
