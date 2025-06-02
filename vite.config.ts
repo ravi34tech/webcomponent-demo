@@ -13,7 +13,7 @@ export default defineConfig({
   // 👇 Insert these lines
   build: {
     lib: {
-      entry: "./src/index.js",
+      entry: "index.html",
       name: "raviwebcomponent",
       fileName: (format) => `ravi-web-component.${format}.js`,
     },
