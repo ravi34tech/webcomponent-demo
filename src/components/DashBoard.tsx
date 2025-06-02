@@ -7,11 +7,12 @@ const DashBoard = (prop: any) => {
       useEffect(() => {
         console.log("DashBoard prop : ",prop);
         setData(prop.data);
-        prop.data.onSuccess({page: "DashBoard", status: "Success", message: "OnEffect"});
+        if(prop?.data?.onSuccess) 
+        prop?.data?.onSuccess({page: "DashBoard", status: "Success", message: "OnEffect"});
       });
     return (
     <>
-        <h1>DashBoard Page : {info.userId}</h1>
+        <h1>DashBoard Page : {info?.userId}</h1>
         <br/><br/>
         <NavLink to="/">Go Back</NavLink>
     </> 

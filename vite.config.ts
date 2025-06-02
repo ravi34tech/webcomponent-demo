@@ -12,10 +12,10 @@ export default defineConfig({
   plugins: [react()],
   
 
-  // 👇 Insert these lines
+   // 👇 Insert these lines
   build: {
     lib: {
-      entry: "index.html",
+      entry: "./src/index.js",
       name: "raviwebcomponent",
       fileName: (format) => `ravi-web-component.${format}.js`,
     },

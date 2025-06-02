@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>R2WC</title>  
+  <link rel="stylesheet" href="./styles.css">  
+</head>
+
+<body>
+  <div id="parent-app">
+      <h1 class="App">WebComponent from GitHub Application...</h1>
+      <div id="CHILD_TEXT">
+
+      </div>
+  </div>
+  <div id="consent-web-component">
+    <test-wc 
+        id="WC-GIT-HUB"
+        name="Server web Component GitHub Test" 
+        link="login" 
+        token="token-conset-456780-github"
+        on-success="onSuccessParentCall"
+        on-error="onErrorParentCall"
+      >
+    </test-wc>
+  </div>
+  <script>
+    var json = {
+      userId: "ABC",
+      authTest: "succes"
+    }
+
+    var jsonObj =JSON.stringify(json);
+
+    document.getElementById('WC-GIT-HUB').setAttribute('info', jsonObj);
+
+      window.onSuccessParentCall = function(e) {
+        console.info("PARENT : SUCCESS : ",e);
+        var htmlvalue = `<div style="background-color: green;">`+ JSON.stringify(e) +`</div>`;
+        document.getElementById("CHILD_TEXT").innerHTML = htmlvalue
+      }
+
+      function onErrorParentCall(event) {
+        console.info("PARENT : ERROR : ",event);
+        var htmlvalue = `<div style="background-color: red;">`+ JSON.stringify(event) +`</div>`;
+        document.getElementById("CHILD_TEXT").innerHTML = htmlvalue;
+      }
+  </script>
+  <script src="../dist/ravi-web-component.umd.js"></script>
+</body>
+
+</html>

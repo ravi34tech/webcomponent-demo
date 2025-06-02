@@ -1,13 +1,13 @@
-import { createBrowserRouter, RouterProvider } from "react-router";
+import { createBrowserRouter, createHashRouter, RouterProvider } from "react-router";
 import { Suspense } from "react";
 import Home from "./components/Home";
 import Login from "./components/Login";
 import DashBoard from "./components/DashBoard";
-// import "./styles-wc.css"
+import "./styles-wc.css"
 
 const HelloApp = (prop: any) => {
   console.log("Hello App : ", prop);
-  const router = createBrowserRouter([
+  const router = createHashRouter([
     {
       path: "/",
       element: (
@@ -49,7 +49,7 @@ const HelloApp = (prop: any) => {
   textAlign: "center"}}>  */}
 
       <div className="testClass">
-        <div>Page Router </div>
+        <div>Main Page Router </div> 
         <RouterProvider router={router} />
       </div>
     </>

@@ -12,9 +12,9 @@ const Login = (prop: any) => {
   const locValues = location.state;
 
   useEffect(() => {
-    console.log("Login prop - 2: ", prop.data);
+    console.log("Login prop - 2: ", prop?.data);
     console.info("State Location vlaues : ", locValues);
-    setData(prop.data);
+    setData(prop?.data);
   });
 
   const onUserNameChange = (e:any) => {
@@ -36,10 +36,10 @@ const Login = (prop: any) => {
 
   return (
     <>
-      <h1>Login Page : {info.userId}</h1>
+      <h1>Login Page : {info?.userId}</h1>
       <div> 
         <input type="text" placeholder="UserName" value={userName} onChange={onUserNameChange}></input> <br/>
-        <input type="password" placeholder="Password" value={password} onChange={onPasswordChange}></input> <br/>
+        <input type="text" placeholder="Password" value={password} onChange={onPasswordChange}></input> <br/>
         <button type="button" onClick={onSubmit}>Login</button>
         <br></br>
       </div>
