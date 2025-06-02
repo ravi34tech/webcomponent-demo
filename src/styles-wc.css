@@ -1,0 +1,35 @@
+/* Webcomponent Styles  */
+
+.App {
+  font-family: 'Courier New', Courier, monospace;
+  text-align: center;
+  color: rgb(83, 83, 238);
+}
+
+.testClass {
+  font-family: 'Courier New', Courier, monospace;
+  background-color: rgb(83, 83, 238);
+  text-align: center;
+}
+
+div input{
+  font-family: 'Courier New', Courier, monospace;
+  align-items: center;
+  margin: 20px;
+  padding: 20px;
+  width: 200px;
+  height: 2px;
+  border-color: chartreuse;
+}
+
+div button {  
+  font-family: 'Courier New', Courier, monospace;
+  width: 100px;
+  height: 30px;
+  background-color:  chartreuse;
+  
+}
+
+div {
+  font-family: 'Courier New', Courier, monospace;
+}
