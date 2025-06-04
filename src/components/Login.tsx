@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, type ChangeEvent } from "react";
 import { NavLink, useLocation } from "react-router";
 
 const Login = (prop: any) => {
@@ -6,7 +6,7 @@ const Login = (prop: any) => {
   const [data, setData] = useState<any>();
   const [userName, setUserName] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const { name, info } = prop.data;
+  const { name, info, onConsentSuccess, onConsentError, onConsentEvent} = prop.data;
 
   const location = useLocation();
   const locValues = location.state;
@@ -15,24 +15,56 @@ const Login = (prop: any) => {
     console.log("Login prop - 2: ", prop?.data);
     console.info("State Location vlaues : ", locValues);
     setData(prop?.data);
+    const messageInfo = {
+          details: {page: "Login Page", status: "Open", type:"Prop Event", message: "Open Login Page by "+userName},
+          bubbles: true,
+          composed: true,
+      };
+    onConsentEvent(messageInfo);
   });
 
-  const onUserNameChange = (e:any) => {
+  const onUserNameChange = (e:ChangeEvent<HTMLInputElement>) => {
     setUserName(e.target.value);
   }
 
-  const onPasswordChange = (e:any) => {
+  const onPasswordChange = (e:ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value)
   }
 
   const onSubmit = () => {
     if(userName && password){
-        data.onSuccess({page: "Login", status: "Success", message: "Login successfully by "+userName});
+      const messageInfo = {
+          details: {page: "Login-1", status: "Success", type:"Prop Event", message: "Login successfully by "+userName},
+          bubbles: true,
+          composed: true,
+      };
+      onConsentSuccess(messageInfo);
+      triggerConsentMgmtEvent("onConsentSuccess",{page: "Login-1", status: "Success", type:"Dispatch Event", message: "Login successfully by "+userName});
     } else {
-        data.onError({page: "Login", status: "Error", message: "Error while login by "+userName});
+      const msg = {page: "Login", status: "Error", type:"Dispatch Event", message: "Error while login by "+userName};
+      triggerConsentMgmtEvent("onConsentError",  msg);
+      const messageInfo = {
+          details: { ...msg, type:"Prop Event"},
+          bubbles: true,
+          composed: true,
+      };
+      onConsentError(messageInfo)
     }
     
   }
+
+   const triggerConsentMgmtEvent = (eventName, data) => {
+    console.info("triggerConsentMgmtEvent triggered..: ",eventName);
+      const event = new CustomEvent(eventName, {
+        detail: data,
+        bubbles: true,
+        composed: true
+      });
+      console.info(eventName," Info is : ",event);
+      document.dispatchEvent(event);    
+      console.info("EVent Dispatched...5");  
+    }
+
 
   return (
     <>

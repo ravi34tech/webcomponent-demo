@@ -9,16 +9,25 @@ export default defineConfig({
       NODE_ENV: "production",
     },
   },
-  plugins: [react()],
-  
+  plugins: [react()],  
 
    // 👇 Insert these lines
   build: {
     lib: {
       entry: "./src/index.js",
-      name: "raviwebcomponent",
+      name: "RaviWebComponent",
       fileName: (format) => `ravi-web-component.${format}.js`,
+      formats: ['es', 'umd'],
     },
+    //  rollupOptions: {
+    //   external: ['react', 'react-dom'],
+    //   output: {
+    //     globals: {
+    //       react: 'React',
+    //       'react-dom': 'ReactDOM',
+    //     },
+    //   },
+    // },
     target: "esnext",
   },
 });
